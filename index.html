@@ -1,23 +1,421 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- JSON-LD for Naver Snippet Optimization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "치과보험 임플란트 보장, 가입 시 유의사항이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "치과보험은 가입 후 일정 기간(면책기간)이 지나야 보장되며, 1년에 보장하는 임플란트 개수(연간 한도)와 금액에 제한이 있습니다. 자세한 내용은 약관을 확인해야 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "비갱신형 치과보험과 갱신형 치과보험의 장단점 차이점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "갱신형은 초기 보험료가 저렴하지만 갱신 시마다 보험료가 상승할 수 있습니다. 비갱신형은 초기 보험료가 상대적으로 높으나 만기까지 보험료 변동 없이 동일하게 유지되어 장기적인 관점에서 유리합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "임플란트 평균 비용은 얼마이며, 치과보험으로 얼마나 절약할 수 있나요?",
+          "@id": "#절약팁-답변",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "임플란트 평균 비용은 1개당 100만 원에서 200만 원 사이로 형성되어 있습니다. 치과보험을 통해 1개당 100만 원 한도 내외로 보장받을 수 있어 비용 부담을 크게 줄일 수 있습니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* CSS Variables for Softer Palette */
+        :root {
+            --primary-color: #0A3D62; /* Deep Blue */
+            --secondary-color: #00A693; /* Teal Green */
+            --accent-color: #FF7F50; /* Coral Orange */
+            --text-color: #333333;
+            --bg-light: #F0F8FF; /* Light Sky Blue */
+            --bg-dark: #1E4D70; /* Darker Blue */
+            --btn-cta: #FF6347; /* Tomato Red */
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        /* Base Styling */
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: var(--bg-light); color: var(--text-color); line-height: 1.8; font-size: 16px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header & Navigation */
+        header { background-color: #ffffff; padding: 15px 0; border-bottom: 2px solid var(--secondary-color); text-align: center; }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 2.2em; color: var(--primary-color); font-weight: 900; }
+        header h1 a { text-decoration: none; color: inherit; display: flex; align-items: center; }
+        header .logo-icon { width: 30px; height: 30px; margin-right: 10px; }
+        header nav a { margin-left: 25px; color: var(--primary-color); text-decoration: none; font-size: 1.1em; font-weight: 500; }
+        header nav a:hover { color: var(--secondary-color); }
+
+        /* Hero Section */
+        .hero { background-color: var(--bg-dark); color: #fff; text-align: center; padding: 100px 20px; }
+        .hero h1 { font-size: 3.5em; margin-bottom: 15px; font-weight: 900; line-height: 1.3; }
+        .hero p { font-size: 1.4em; margin-bottom: 40px; font-weight: 300; }
+        
+        /* Comparison Form Box */
+        .compare-form-box { background-color: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 30px; position: relative; max-width: 800px; margin: 30px auto; }
+        .compare-form-box h2 { color: var(--primary-color); text-align: center; margin-bottom: 25px; font-size: 2em; font-weight: 700; }
+        .compare-form-box form { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .form-group { text-align: left; }
+        .compare-form-box label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-color); }
+        .compare-form-box input, .compare-form-box select { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1em; }
+        .form-full-width { grid-column: 1 / -1; }
+        .compare-form-box .cta-btn-wrapper { grid-column: 1 / -1; text-align: center; margin-top: 20px; }
+        
+        /* CTA Button */
+        .cta-btn { background-color: var(--btn-cta); color: #fff; padding: 18px 40px; font-size: 1.3em; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); text-decoration: none; display: inline-block; width: 100%; max-width: 400px; }
+        .cta-btn:hover { background-color: #e5503b; transform: translateY(-3px); }
+
+        /* Content Sections */
+        .content-section { background-color: #ffffff; padding: 80px 0; margin-top: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .content-section h2 { font-size: 2.8em; color: var(--primary-color); padding-bottom: 15px; margin-bottom: 30px; text-align: center; font-weight: 700; border-bottom: 3px solid var(--secondary-color); display: inline-block; margin: 0 auto 30px; }
+        .content-section h3 { font-size: 1.8em; color: var(--primary-color); margin-top: 40px; margin-bottom: 15px; border-left: 5px solid var(--secondary-color); padding-left: 15px; font-weight: 700; }
+        .content-section p { margin-bottom: 20px; font-size: 1.05em; line-height: 1.9; }
+
+        /* Feature Grid */
+        .feature-grid { display: flex; flex-wrap: wrap; justify-content: space-between; text-align: center; margin-top: 40px; }
+        .feature-grid .item { width: calc(33.33% - 20px); margin: 10px; padding: 30px; background-color: var(--bg-light); border-radius: 10px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .feature-grid .item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .feature-grid .item .icon { font-size: 2.5em; color: var(--secondary-color); margin-bottom: 15px; }
+        .feature-grid .item h3 { font-size: 1.3em; color: var(--primary-color); margin-top: 0; }
+        .feature-grid .item p { font-size: 0.9em; line-height: 1.6; color: #555; }
+        
+        /* Keyword List */
+        .keyword-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; margin-top: 40px; }
+        .keyword-list li { background-color: var(--secondary-color); color: #fff; padding: 10px 20px; margin: 6px; border-radius: 25px; font-weight: 500; font-size: 0.95em; transition: background-color 0.3s; }
+        .keyword-list li:hover { background-color: #008f7f; }
+
+        /* Data Visualization Table */
+        .data-table-section { margin-top: 50px; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fafafa; }
+        .data-table th, .data-table td { border: 1px solid #ddd; padding: 15px; text-align: center; font-size: 0.95em; }
+        .data-table th { background-color: var(--primary-color); color: #fff; font-weight: 700; }
+        .data-table tr:nth-child(even) { background-color: #f7f7f7; }
+
+        /* FAQ Section */
+        .faq-item { border-bottom: 1px solid #eee; padding: 20px 0; }
+        .faq-item h3 { cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1.2em; color: var(--primary-color); }
+        .faq-item h3::after { content: '>'; font-size: 1.5em; color: var(--secondary-color); transition: transform 0.3s; font-weight: 900; }
+        .faq-item.active h3::after { content: 'v'; transform: rotate(180deg); }
+        .faq-item p { display: none; padding-top: 15px; color: #555; line-height: 1.7; font-size: 1em; }
+        .faq-item.active p { display: block; }
+        
+        /* Footer */
+        footer { background-color: var(--primary-color); color: #e0e0e0; text-align: center; padding: 40px 20px; font-size: 0.9em; border-top: 5px solid var(--secondary-color); }
+        footer a { color: #fff; text-decoration: none; margin: 0 10px; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1.2em; }
+            .compare-form-box form { grid-template-columns: 1fr; }
+            .feature-grid .item { width: calc(50% - 20px); }
+            .content-section h2 { font-size: 2em; }
+        }
+        @media (max-width: 600px) {
+            header .container { flex-direction: column; text-align: center; }
+            header nav { margin-top: 10px; }
+            header nav a { margin: 0 10px; }
+            .feature-grid .item { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="/"><img src="https://via.placeholder.com/30/00A693/fff?text=T" class="logo-icon" alt="임플란트 아이콘"> 치과보험 임플란트 비교</a></h1>
+            <nav>
+                <a href="#가입가이드">가입 가이드</a>
+                <a href="#비용절감팁">비용 절감 팁</a>
+                <a href="#faq">자주 묻는 질문</a>
+            </nav>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>임플란트 치과보험, 현명하게 선택하는 2026년 가이드</h1>
+                <p>가장 저렴한 치과보험을 찾으시나요? 복잡한 보장 내용을 한눈에 비교하고 내게 딱 맞는 견적을 받아보세요.</p>
+                <!-- Comparison Form Box -->
+                <div class="compare-form-box">
+                    <h2>2026년 실시간 치과보험료 비교 견적 서비스</h2>
+                    <p>간단한 정보 입력으로 **임플란트 보장이 좋은 치과보험** 상품을 찾아드립니다.</p>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" placeholder="이름을 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">연락처</label>
+                            <input type="tel" id="phone" placeholder="휴대폰 번호를 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthdate">생년월일</label>
+                            <input type="date" id="birthdate" placeholder="생년월일" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">성별</label>
+                            <select id="gender" required>
+                                <option value="">선택</option>
+                                <option value="male">남성</option>
+                                <option value="female">여성</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-full-width">
+                            <label for="pre_conditions">최근 1년 이내 치과 치료력(진단)</label>
+                            <select id="pre_conditions">
+                                <option value="no">없음</option>
+                                <option value="yes">있음 (상담 필요)</option>
+                            </select>
+                        </div>
+                        <div class="cta-btn-wrapper">
+                            <button type="submit" class="cta-btn">맞춤 임플란트 치과보험 견적 받기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Section 1: Introduction and Service Features -->
+        <section class="content-section">
+            <div class="container">
+                <h2>왜 저희 '치과보험 임플란트 비교'를 선택해야 할까요?</h2>
+                <div class="feature-grid">
+                    <div class="item">
+                        <div class="icon">🔍</div>
+                        <h3>맞춤형 견적 비교</h3>
+                        <p>고객님의 연령, 성별, 건강 상태에 맞춰 **비갱신형** 상품을 포함한 최적의 **치과보험** 견적을 비교해 드립니다.</p>
+                    </div>
+                    <div class="item">
+                        <div class="icon">🏆</div>
+                        <h3>가장 저렴한 상품 추천</h3>
+                        <p>복잡한 보험사별 보장 내용을 분석하여 고객에게 **임플란트 비용** 부담이 가장 적은 **치과보험 싼곳**을 찾아드립니다.</p>
+                    </div>
+                    <div class="item">
+                        <div class="icon">🛡️</div>
+                        <h3>전문가 1:1 상담</h3>
+                        <p>가입부터 청구까지 궁금한 점을 1:1 전문가 상담을 통해 해결하여 **치과보험 가입**의 문턱을 낮춥니다.</p>
+                    </div>
+                </div>
+
+                <!-- Related Keywords Section -->
+                <h3 style="margin-top: 60px;">함께 많이 찾는 키워드</h3>
+                <ul class="keyword-list">
+                    <li>#치과보험비교사이트</li>
+                    <li>#비갱신형치과보험</li>
+                    <li>#치아보험가격비교</li>
+                    <li>#임플란트보험료</li>
+                    <li>#치과보험추천</li>
+                    <li>#임플란트비용절약</li>
+                    <li>#치아보험단점</li>
+                    <li>#치과보험가입조건</li>
+                    <li>#임플란트보장금액</li>
+                    <li>#어린이치아보험</li>
+                    <li>#실버치과보험</li>
+                    <li>#치과보험면책기간</li>
+                    <li>#치과보험보장금액</li>
+                    <li>#임플란트내돈내산후기</li>
+                    <li>#치과보험순위</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Main Content Section 2: Detailed Information on Implants and Insurance -->
+        <section class="content-section" style="background-color: #fcfcfc;">
+            <div class="container">
+                <h2 id="가입가이드">2026년 치과보험 임플란트 가입 가이드: 핵심 정보 분석</h2>
+                <p>
+                    임플란트는 상실된 치아를 대체하는 가장 효과적인 방법이지만, 그 **비용** 때문에 많은 분들이 고민합니다. 2026년 현재 임플란트 1개당 **평균 금액**은 100만 원에서 200만 원 사이에 형성되어 있습니다. 국민건강보험이 적용되지 않는 비급여 항목이기 때문에 **치과보험**이 필수적입니다.
+                </p>
+                <img src="https://via.placeholder.com/1100x400/F0F8FF/333?text=치과보험+임플란트+상담+이미지" alt="치과보험 임플란트 절약 가이드 이미지" style="width:100%; margin: 20px 0; border-radius: 8px;">
+
+                <h3 id="비용분석">1. 임플란트 평균 비용 상세 분석과 보장 범위</h3>
+                <p>
+                    임플란트의 **가격**은 치아 1개당 **평균**적으로 100만원~200만원으로, 병원 규모, 사용되는 임플란트 재료(예: 오스템, 디오, 덴티움 등), 그리고 난이도에 따라 **비용** 차이가 크게 발생합니다. 특히 뼈 이식(골이식)이 필요한 경우 추가 **비용**이 발생할 수 있습니다. <a href="https://www.namu.wiki/w/%EC%9E%84%ED%94%8C%EB%9E%80%ED%8A%B8" target="_blank" rel="nofollow">나무위키</a>나 <a href="https://www.khealth.or.kr/" target="_blank" rel="nofollow">한국건강증진개발원</a>과 같은 신뢰할 수 있는 정보를 통해 최신 **임플란트 비용** 동향을 확인하는 것이 중요합니다.
+                </p>
+                <p>
+                    치과보험은 이러한 고액의 **임플란트 비용**을 보장해주는 상품입니다. 일반적으로 **임플란트** 1개당 정해진 보장 **금액**을 지급하며, 보험사별로 **연간 한도**가 정해져 있습니다. 예를 들어, 연간 3개 한도로 1개당 100만 원을 보장한다면, 1년에 최대 300만 원까지 보장받을 수 있습니다.
+                </p>
+
+                <div class="data-table-section">
+                    <h3>2026년 임플란트 평균 비용 및 보장 한도 (예시)</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>평균 비용 (1개당)</th>
+                                <th>치과보험 보장 금액 (1개당)</th>
+                                <th>치과보험 연간 한도 (예시)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>임플란트 (국산)</td>
+                                <td>100만원 ~ 150만원</td>
+                                <td>100만원 (가입 상품에 따라 상이)</td>
+                                <td>3개 (보험사별 상이)</td>
+                            </tr>
+                            <tr>
+                                <td>임플란트 (수입산)</td>
+                                <td>150만원 ~ 200만원 이상</td>
+                                <td>100만원 (가입 상품에 따라 상이)</td>
+                                <td>3개 (보험사별 상이)</td>
+                            </tr>
+                            <tr>
+                                <td>뼈 이식(골이식) 추가 시</td>
+                                <td>30만원 ~ 50만원 (추가)</td>
+                                <td>특약 가입 시 별도 보장</td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 id="가입전주의사항">2. 치과보험 가입 전 반드시 확인해야 할 3가지: 면책기간, 감액기간, 보장한도</h3>
+                <p>
+                    치과보험은 가입 즉시 보장되는 것이 아닙니다. **임플란트** 보장을 받기 위해서는 '면책기간'과 '감액기간'이라는 제도를 이해해야 합니다.
+                </p>
+                <ul>
+                    <li><strong>면책기간:</strong> 보험 가입 후 일정 기간(보통 1년) 동안은 보험금을 지급하지 않습니다. 이 기간 내에 치료받은 부분에 대해서는 **내돈내산**으로 처리됩니다.</li>
+                    <li><strong>감액기간:</strong> 면책기간 이후에도 일정 기간(보통 1년~2년) 동안은 보험금의 일부(50% 내외)만 지급합니다.</li>
+                    <li><strong>연간 보장 한도:</strong> 임플란트 보장의 핵심입니다. 보험사별로 **연간 보장 한도**가 다르므로, 여러 개를 한 번에 심을 계획이라면 한도가 높은 상품이 유리합니다.</li>
+                </ul>
+
+                <h3 id="갱신형비갱신형">3. 갱신형 vs 비갱신형 치과보험 장단점 비교</h3>
+                <p>
+                    치과보험은 크게 갱신형과 비갱신형으로 나뉩니다. 두 상품은 **장단점**이 뚜렷하게 다르므로, 본인의 상황에 맞춰 선택해야 합니다.
+                </p>
+                <ul>
+                    <li><strong>갱신형 치과보험:</strong> 초기 **보험료**가 저렴합니다. 하지만 갱신 주기(3년, 5년 등)마다 보험료가 상승할 수 있습니다. 단기적으로 보장을 원하거나 현재 소득이 적은 경우 고려해 볼 수 있습니다.</li>
+                    <li><strong>비갱신형 치과보험:</strong> 초기 **보험료**는 갱신형보다 높지만, 납입 기간 동안 **보험료** 변동이 없습니다. 장기적으로 보장을 원하거나 노후에 **임플란트** 계획이 있다면 **비갱신형 치과보험**이 훨씬 유리합니다. <a href="https://www.fss.or.kr/" target="_blank" rel="nofollow">금융감독원</a> 자료에 따르면 장기간 유지 시 비갱신형이 총 납입 **비용**에서 더 절약되는 경우가 많습니다.</li>
+                </ul>
+
+                <!-- Dwell Time Optimization Form Section -->
+                <div class="compare-form-box" style="margin-top: 50px; background-color: #f7f7f7;">
+                    <h2>나에게 맞는 임플란트 보장 범위 확인하기</h2>
+                    <p>간단한 설문을 통해 필요한 보장 내용만 골라 최적의 **치과보험** 견적을 받아보세요.</p>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="coverage_type">주요 보장 희망 항목</label>
+                            <select id="coverage_type">
+                                <option value="implant">임플란트</option>
+                                <option value="crown">크라운 (금니, 지르코니아)</option>
+                                <option value="filling">충치치료 (아말감, 레진)</option>
+                                <option value="all">모두</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="coverage_amount">희망 보장 한도 (연간)</label>
+                            <select id="coverage_amount">
+                                <option value="100">임플란트 1개 (약 100만원)</option>
+                                <option value="200">임플란트 2개 (약 200만원)</option>
+                                <option value="300">임플란트 3개 (약 300만원)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">월 납입 희망 보험료</label>
+                            <select id="budget">
+                                <option value="3">3만원 이하</option>
+                                <option value="4">4만원~5만원</option>
+                                <option value="5">5만원 이상</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="term">원하는 가입 기간</label>
+                            <select id="term">
+                                <option value="long">장기 (비갱신형)</option>
+                                <option value="short">단기 (갱신형)</option>
+                            </select>
+                        </div>
+                        <div class="cta-btn-wrapper">
+                            <button type="submit" class="cta-btn">맞춤 견적 분석 요청하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Section 3: Saving Tips and Detailed Comparison -->
+        <section class="content-section">
+            <div class="container">
+                <h2 id="비용절감팁">치과보험료 절감 팁: 똑똑하게 가입하기</h2>
+                <p>
+                    **치과보험 저렴한곳**을 찾는 것만큼 중요한 것은 똑똑하게 가입하여 **보험료**를 절약하는 것입니다. 다음은 **치과보험료**를 줄일 수 있는 몇 가지 팁입니다.
+                </p>
+                <img src="https://via.placeholder.com/1100x400/F0F8FF/333?text=치과보험+절약+팁+이미지" alt="치과보험 절약 팁 관련 이미지" style="width:100%; margin: 20px 0; border-radius: 8px;">
+
+                <h3 id="다이렉트가입">1. 다이렉트 가입과 비교 견적 활용하기</h3>
+                <p>
+                    **다이렉트 치과보험**은 설계사를 통하지 않고 직접 온라인으로 가입하기 때문에 **보험료**가 더 저렴합니다. 여러 보험사의 **다이렉트 치과보험** 상품을 **비교견적사이트**에서 한 번에 확인하면 **평균**적으로 10~20%의 **보험료** 절감 효과를 볼 수 있습니다. 동일한 보장 내용이라도 보험사별 **가격**이 다르기 때문에 **비교**는 필수입니다.
+                </p>
+                <h3 id="보장범위조정">2. 보장 범위와 한도를 현실적으로 조정하기</h3>
+                <p>
+                    무조건 최대 보장 한도를 선택하기보다는 본인의 치아 건강 상태를 고려하여 보장 범위를 설정하는 것이 중요합니다. 예를 들어, 이미 충치 치료를 모두 마쳤다면 충치 보장보다는 **임플란트** 보장 한도를 높이는 데 집중하고, **갱신형** 상품보다는 **비갱신형** 상품을 고려할 수 있습니다. <a href="https://www.e-insmarket.or.kr/" target="_blank" rel="nofollow">보험다모아</a>와 같은 공식 비교 사이트에서 제공하는 **치과보험 순위**나 **추천** 정보를 참고하여 **치과보험료**를 효율적으로 관리하세요.
+                </p>
+                <h3 id="가입시기">3. 치과보험 가입 시기: 면책기간과 감액기간 고려</h3>
+                <p>
+                    **치과보험**은 면책기간 때문에 가입 시기가 매우 중요합니다. 당장 치료가 필요하다면 가입하더라도 보장을 받을 수 없습니다. **임플란트**는 장기간 계획을 세워야 하므로, 치아 상태가 양호할 때 미리 가입하여 면책기간(1년~2년)을 채우는 것이 **임플란트 비용** 절감의 핵심입니다.
+                </p>
+
+                <div class="compare-form-box" style="margin-top: 50px; background-color: #f7f7f7;">
+                    <h2>나에게 가장 적합한 치과보험을 지금 바로 비교하세요!</h2>
+                    <p>복잡한 보험 약관 대신, 전문가의 친절한 상담을 통해 **가장 저렴한 치과보험**을 찾아드립니다.</p>
+                    <div class="cta-btn-wrapper">
+                        <a href="#" class="cta-btn">무료 견적 1:1 상담 신청</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="content-section" style="background-color: #ffffff;">
+            <div class="container">
+                <h2 id="faq">자주 묻는 질문 (FAQ)</h2>
+                <div class="faq-item">
+                    <h3 id="q1">Q. 치과보험 가입이 거절될 수도 있나요?</h3>
+                    <p>A. 네, 가입 전 고지 의무사항을 통해 최근 1~2년 이내 치과 치료력이 있거나, 치료가 예정된 경우에는 가입이 어렵거나 보장이 제한될 수 있습니다. 특히 <strong>임플란트</strong> 관련 치료를 받은 적이 있다면 보험사별로 가입 조건이 달라지므로, **치과보험 비교사이트**를 통해 내 상황에 맞는 상품을 찾아야 합니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q2">Q. 임플란트 치과보험, 보장 한도에 제한이 있나요?</h3>
+                    <p>A. 대부분의 치과보험은 <strong>임플란트</strong> 1개당 정해진 보장 금액(예: 100만 원)을 지급하며, 연간 보장 한도(예: 3개)가 정해져 있습니다. <strong>치과보험료</strong>를 낮추기 위해 연간 한도가 적은 상품을 선택하거나, 보장 한도가 큰 상품을 선택하여 <strong>임플란트 비용</strong> 부담을 줄이는 방법을 선택할 수 있습니다. <strong>장단점</strong>을 고려하여 선택해야 합니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q3">Q. 비갱신형 치과보험의 장점과 단점은 무엇인가요?</h3>
+                    <p>A. <strong>비갱신형 치과보험</strong>의 가장 큰 <strong>장점</strong>은 납입 기간 동안 **보험료**가 오르지 않는다는 점입니다. <strong>단점</strong>은 갱신형 상품보다 초기 **보험료**가 높다는 것입니다. 장기간 유지할 경우 총 납입 **비용**은 비갱신형이 유리하며, **임플란트** 보장을 장기적으로 준비하는 분들에게 <strong>추천</strong>됩니다. <strong>차이점</strong>을 명확히 이해하고 가입해야 합니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q4">Q. 임플란트 외 다른 치료도 보장받을 수 있나요?</h3>
+                    <p>A. 네, <strong>치과보험</strong>은 <strong>임플란트</strong>(보철치료) 외에도 충치 치료(보존치료)와 잇몸 치료 등을 보장하는 상품이 많습니다. 보존치료는 크라운(금니, 지르코니아)이나 인레이, 레진 등 충치 치료를 의미하며, <strong>임플란트</strong>와 마찬가지로 면책/감액 기간 및 연간 한도가 적용됩니다.</p>
+                </div>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <!-- JavaScript for Toggle Functionality -->
+    <script>
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+  
